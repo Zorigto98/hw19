@@ -1,0 +1,5 @@
+Create a small text file "words.txt" that contains different words.
+You can use any Russian-speaking words.
+Develop a program that would search among these words
+for what the user needs and would display the total number of
+repetitions of this word. 0 - if the word is not present in the file at all.
