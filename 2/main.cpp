@@ -7,21 +7,26 @@ using namespace std;
 
 int main() {
     string path;
-    cout << "Enter file path" << endl;
-    cout << "Example: D:\\\\SkillBox\\\\19_les\\\\file.txt" << endl;
-    cin >> path;
+    /*cout << "Enter file path" << endl;
+    cout << "../file.txt" << endl;
+    cin >> path;*/
 
-    string line;
+    // or
+
+    path="../file.txt";
+
+    char text[2];
     ifstream file(path);
 
     if (file.is_open())
     {
-        while (getline(file, line))
+        while (!file.eof())
         {
-            cout << line << endl;
+            file.read(text, 1);
+            cout << text[0];
         }
     }
-    else cout << "Incorrect path" << endl;
+    else cout << "Incorrect path or file doesn't open" << endl;
 
     file.close();
 }

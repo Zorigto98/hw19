@@ -10,7 +10,7 @@ using namespace std;
 void chose_question (int sector) // вывод вопроса в консоль из файла в зависимости от сектора
 {
     string buffer;
-    ifstream questions ("D:\\Study\\SkillBox\\19_les\\5\\questions.txt");
+    ifstream questions ("../questions.txt");
 
     for (int i=0; i<sector; i++)
     {
@@ -27,14 +27,14 @@ bool check_answer(int sector) // проверка введенного отве�
     cout << "Введите ответ" << endl;
     cin >> answer;
 
-    ifstream answers ("D:\\Study\\SkillBox\\19_les\\5\\answers.txt");
+    ifstream answers ("../answers.txt");
 
     for (int i=0; i<sector; i++)
     {
         getline(answers, buffer);
     }
-    if (buffer==answer) return true;
-    else return false;
+
+    return buffer==answer;
 }
 
 int main() {

@@ -8,30 +8,28 @@ using namespace std;
 int main() {
 
     ifstream payout;
-    payout.open("D:\\Study\\SkillBox\\19_les\\3\\payout.txt");
+    payout.open("../payout.txt");
 
-    string name, lastName, date, str;
-    int money, sum=0, max=0, count=0;
+    string name, lastName, date, str, Mon;
+    float money, sum=0, max=0;
 
     if (payout.is_open())
     {
         while (!payout.eof())
         {
-            count++;
             payout >> name >> lastName >> money >> date;
+            if (payout.eof()) break;
             sum+=money;
-
             if (money>max)
             {
                 max=money;
                 str=name + " " + lastName;
             }
         }
+        cout << "Total payout: " << sum << endl;
+        cout << "Person with highest payout: " << str << endl;
     }
     else cout << "File is not open";
 
     payout.close();
-
-    cout << "Total payout: " << sum << endl;
-    cout << "Person with highest payout: " << str << endl;
 }
