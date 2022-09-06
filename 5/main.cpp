@@ -3,7 +3,7 @@
 #include <string>
 #include <istream>
 #include <vector>
-#include <Windows.h>
+
 
 using namespace std;
 
@@ -12,7 +12,7 @@ void chose_question (int sector) // вывод вопроса в консоль 
     string buffer;
     ifstream questions ("../questions.txt");
 
-    for (int i=0; i<sector; i++)
+    for (int i=0; i<=sector; i++)
     {
         getline(questions, buffer);
     }
@@ -24,12 +24,12 @@ bool check_answer(int sector) // проверка введенного отве�
     string answer;
     string buffer;
 
-    cout << "Введите ответ" << endl;
+    cout << "Input answer " << endl;
     cin >> answer;
 
     ifstream answers ("../answers.txt");
 
-    for (int i=0; i<sector; i++)
+    for (int i=0; i<=sector; i++)
     {
         getline(answers, buffer);
     }
@@ -38,49 +38,49 @@ bool check_answer(int sector) // проверка введенного отве�
 }
 
 int main() {
-    SetConsoleOutputCP(CP_UTF8);
+    setlocale(LC_ALL, "Russian");
     vector <bool> questions (13);
-    int sector=1;
+    int sector=0;
     int count_experts=0, count_viewers=0;
     bool win=false;
 
     while(!win)
     {
         int offset=0;
-        cout << "Введите смещение" << endl;
+        cout << "Input offset" << endl;
         cin >> offset;
 
         sector=(sector+offset)%13;
 
-        if (questions[sector-1])
+        if (questions[sector])
         {
-            while (questions[sector-1]) sector++;
-            questions[sector-1]=true;
+            while (questions[sector]) sector++;
+            questions[sector]=true;
         }
-        else questions[sector-1]=true;
+        else questions[sector]=true;
 
         for (int i=0; i<questions.size(); i++) // для проверки, правильно ли выводятся вопросы
         {
             cout << i+1 << "-" << questions[i] << " | ";
         }
-        cout << " сектор " << sector << endl; //
+        cout << " sector " << sector+1 << endl; // для проверки сектора
 
         chose_question(sector);
 
         if (check_answer(sector)) count_experts++; // подсчет очков
         else count_viewers++;
-        cout << "Счет: Знатоки - " << count_experts << " Зрители - " << count_viewers << endl;
+        cout << "Score: Experts - " << count_experts << " Viewers - " << count_viewers << endl;
 
         if (count_viewers==6 || count_experts==6) // проверка победителя
         {
             if (count_experts>count_viewers)
             {
-                cout << "Победили знатоки" << endl;
+                cout << "Experts won" << endl;
                 win=true;
             }
             else
             {
-                cout << "Победили зрители" << endl;
+                cout << "Viewers won" << endl;
                 win=true;
             }
         }
